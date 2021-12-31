@@ -1,23 +1,72 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import {
+  Home,
+  Products,
+  SingleProduct,
+  CreateProduct,
+  EditProduct,
+  Categories,
+} from "./pages";
+import { Footer, Header, Main } from "./components";
+import "./scss/styles.scss";
+
+const headerLinks = [
+  {
+    title: "Home",
+    to: "/",
+  },
+  {
+    title: "Products",
+    to: "/products",
+  },
+  {
+    title: "Categories",
+    to: "/categories",
+  },
+];
+
+const pages = [
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/products",
+    element: <Products />,
+  },
+  {
+    path: "products/:id",
+    element: <SingleProduct />,
+  },
+  {
+    path: "/products/create",
+    element: <CreateProduct />,
+  },
+  {
+    path: "/products/edit",
+    element: <EditProduct />,
+  },
+  {
+    path: "/categories",
+    element: <Categories />,
+  },
+];
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Header links={headerLinks} />
+        <Main>
+          <Routes>
+            {Boolean(pages?.length) &&
+              pages.map((page, index) => (
+                <Route path={page.path} element={page.element} key={index} />
+              ))}
+          </Routes>
+        </Main>
+        <Footer />
+      </Router>
     </div>
   );
 }
