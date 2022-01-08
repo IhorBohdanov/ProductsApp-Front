@@ -1,11 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getProducts } from "../api";
-import { Page, List, ProductItem, Pagination } from "../components";
+import { Page, List, ProductItem, Pagination, Filters } from "../components";
 
 const addProductButton = <Link to="/products/create" className="button button_style_add">+ Add Product</Link>;
-
-
 
 export const Products = () => {
   const [products, setProducts] = useState([]);
@@ -29,6 +27,10 @@ export const Products = () => {
     setPage(pageNum)
   }
 
+  const handleFilterSubmit = (filters) => {
+    console.log(filters)
+  }
+
   return (
     <Page pageTitle="Products" suffix={addProductButton} wide>
       <Pagination 
@@ -37,6 +39,7 @@ export const Products = () => {
         elementsPerPage={10}
         onPageChange={handlePageChange}
       />
+      <Filters onSubmit={handleFilterSubmit}/>
 
       <List dataArray={products} />
     </Page>

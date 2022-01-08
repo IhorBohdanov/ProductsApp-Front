@@ -116,7 +116,7 @@ html {
       color: $dark-salmon;
       font-weight: 600;
       background-color: $white;
-      border: 3px solid $dark-salmon;
+      border: 2px solid $dark-salmon;
       padding: 10px;
 
       &.active {
@@ -227,4 +227,36 @@ html {
     display: flex;
     gap: 8px;
   } 
+}
+
+.filters {
+  background-color: $white;
+  border: 2px solid $ming;
+  border-radius: 10px;
+  padding: 15px 20px;
+  margin: 0 10px 25px;  
+}
+
+.form {
+  &__item {
+    margin: 10px 0 5px;
+  }
+
+  &__title {
+    font-size: 20px;
+    color: $ming;
+  }
+}
+
+.input {
+  font-size: 20px;
+}
+
+.checkbox-item {
+  margin-top: 10px;
+  margin-bottom: 5px;
+
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
 }

@@ -6,3 +6,4 @@ export * from "./List";
 export * from "./ProductItem";
 export * from "./CategoryItem";
 export * from "./Pagination";
+export * from "./Filters";
