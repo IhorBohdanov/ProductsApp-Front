@@ -5,3 +5,4 @@ export * from "./Page";
 export * from "./List";
 export * from "./ProductItem";
 export * from "./CategoryItem";
+export * from "./Pagination";

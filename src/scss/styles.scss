@@ -111,6 +111,19 @@ html {
     &_add {
       background-color: $green;
     }
+
+    &_page {
+      color: $dark-salmon;
+      font-weight: 600;
+      background-color: $white;
+      border: 3px solid $dark-salmon;
+      padding: 10px;
+
+      &.active {
+        color: white;
+        background-color: $dark-salmon;
+      }
+    }
   }
 }
 
@@ -206,4 +219,12 @@ html {
       margin-right: 10px;
     }
   }
+}
+
+.pagination {
+  &__inner {
+    margin: 0 10px;
+    display: flex;
+    gap: 8px;
+  } 
 }
