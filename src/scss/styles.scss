@@ -70,3 +70,140 @@ html {
     padding: 10px;
   }
 } 
+
+.page {
+  &__header {
+    display: flex;
+    align-items: center ;
+    justify-content: space-between;
+  }
+
+  &__body {
+    &_wide {
+      margin-left: -10px;
+      margin-right: -10px;
+    }
+  }
+}
+
+.button {
+  text-decoration: none;
+  cursor: pointer;
+  background-color: $dark-salmon;
+  padding: 15px;
+  border-radius: 4px;
+  color: $alice-blue;
+  border: unset;
+  box-sizing: border-box;
+  font-size: 15px;
+  line-height: 15px;
+  display: inline-block;
+
+  &:hover {
+    opacity: 0.6;
+  }
+
+  &_style {
+    &_danger {
+      background-color: $red;
+    }
+
+    &_add {
+      background-color: $green;
+    }
+  }
+}
+
+.product {
+  background-color: $white;
+  border: 2px solid $dark-salmon;
+  border-radius: 10px;
+  padding: 15px 20px;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+  }
+
+  &__meta {
+    margin-left: 20px;
+  }
+
+  &__id {
+    background-color: $dark-salmon;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: $white;
+  }
+
+  &__name {
+    font-size: 20px; 
+    margin-bottom: 10px;
+    a {
+      text-decoration: none;
+      color: $ming;
+      &:hover {
+        opacity: 0.8;
+      } 
+    }
+  }
+
+  &__price {
+    color: $ming;
+  }
+
+  &__action {
+    margin-left: auto;
+
+    *:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+}
+
+
+
+.category {
+  background-color: $white;
+  border: 2px solid $dark-salmon;
+  border-radius: 10px;
+  padding: 15px 20px;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+  }
+
+  &__meta {
+    margin-left: 20px;
+  }
+
+  &__id {
+    background-color: $dark-salmon;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: $white;
+  }
+
+  &__name {
+    font-size: 20px; 
+    margin-bottom: 10px;
+    color: $ming;
+  }
+
+  &__action {
+    margin-left: auto;
+
+    *:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+}

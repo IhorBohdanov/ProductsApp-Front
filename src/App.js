@@ -43,7 +43,7 @@ const pages = [
     element: <CreateProduct />,
   },
   {
-    path: "/products/edit",
+    path: "/products/edit/:id",
     element: <EditProduct />,
   },
   {

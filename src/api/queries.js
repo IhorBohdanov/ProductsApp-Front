@@ -1,5 +1,7 @@
-const GET_PRODUCTS = '/products';
+const PRODUCTS = '/products';
+const CATEGORIES = '/categories';
 
 export const queries = {
-    GET_PRODUCTS,
+    PRODUCTS,
+    CATEGORIES,
 }
