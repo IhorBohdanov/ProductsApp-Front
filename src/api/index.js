@@ -15,7 +15,8 @@ import axios from "axios";
 //   },
 // };
 
-export const getProducts = () => {
+export const getProducts = (options) => {
+  console.log(options);
   return fetch(BASE_URL + queries.PRODUCTS)
     .then((res) => {
       if (!res.ok) {

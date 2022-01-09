@@ -1,47 +1,41 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { getProducts } from "../api";
 import { Page, List, ProductItem, Pagination, Filters } from "../components";
+import { useProducts } from "../hooks";
 
-const addProductButton = <Link to="/products/create" className="button button_style_add">+ Add Product</Link>;
+const addProductButton = (
+  <Link to="/products/create" className="button button_style_add">
+    + Add Product
+  </Link>
+);
 
 export const Products = () => {
-  const [products, setProducts] = useState([]);
-
-  const fetchProducts = useCallback(async () => {
-    const res = await getProducts();
-    setProducts(res.data.reverse().map((item) => <ProductItem product={item} />));
-  }, [setProducts]);
-
-  useEffect(() => {
-    (async () => {
-      await fetchProducts();  
-    })();
-  }, [fetchProducts]);
-
-  const [page, setPage] = useState(1);
-
+  const { products, setFilters, page, setPage } = useProducts();
 
   const handlePageChange = (pageNum) => {
-    console.log(pageNum)
-    setPage(pageNum)
-  }
+    setPage(pageNum);
+  };
 
   const handleFilterSubmit = (filters) => {
-    console.log(filters)
-  }
+    setFilters(filters);
+  };
+
+  const productsList = useMemo(() => {
+    return products.map((product) => <ProductItem product={product} />);
+  }, [products]);
 
   return (
     <Page pageTitle="Products" suffix={addProductButton} wide>
-      <Pagination 
+      <Filters onSubmit={handleFilterSubmit} />
+
+      <List dataArray={productsList} />
+
+      <Pagination
         currentPage={page}
         totalElements={22}
         elementsPerPage={10}
         onPageChange={handlePageChange}
       />
-      <Filters onSubmit={handleFilterSubmit}/>
-
-      <List dataArray={products} />
     </Page>
   );
 };
