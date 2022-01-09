@@ -1,5 +1,10 @@
 import React from "react";
+import { Page, ProductForm } from "../components";
 
 export const CreateProduct = () => {
-  return <div>Create Product</div>;
+  return (
+    <Page pageTitle="Create Product">
+      <ProductForm />
+    </Page>
+  );
 };
