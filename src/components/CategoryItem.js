@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export const CategoryItem = ({ category }) => {
+export const CategoryItem = ({ category, onDelete }) => {
   return (
     <div className="category">
       <div className="category__inner">
@@ -12,7 +12,7 @@ export const CategoryItem = ({ category }) => {
         </div>  
         <div className="category__action">
           <Link to={"category/edit" + category.id} className="button">Edit</Link>
-          <button className="button button_style_danger">Delete</button>
+          <button className="button button_style_danger" onClick={() => onDelete(category.id)} >Delete</button>
         </div>
       </div>
     </div>

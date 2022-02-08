@@ -15,9 +15,8 @@ import axios from "axios";
 //   },
 // };
 
-export const getProducts = (options) => {
-  console.log(options);
-  return fetch(BASE_URL + queries.PRODUCTS)
+export const getProducts = async (options) => {
+  return await fetch(BASE_URL + queries.PRODUCTS)
     .then((res) => {
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
@@ -29,8 +28,8 @@ export const getProducts = (options) => {
     });
 };
 
-export const getProduct = ({id}) => {
-  return fetch(BASE_URL + queries.PRODUCTS + '/' + id)
+export const getProduct = async ({id}) => {
+  return await fetch(BASE_URL + queries.PRODUCTS + '/' + id)
     .then((res) => {
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
@@ -42,8 +41,58 @@ export const getProduct = ({id}) => {
     });
 }
 
-export const deleteProduct = ({id}) => {
-  return fetch(BASE_URL + queries.PRODUCTS + '/' + id, { method: "DELETE"})
+export const deleteProduct = async (id) => {
+  return await fetch(BASE_URL + queries.PRODUCTS + '/' + id, { method: "DELETE"})
+  .then((res) => {
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+    return res.json();
+  })
+  .then((data) => {
+    return data;
+  });
+}
+
+export const updateProduct = async (product) => {
+  console.log('updateProduct', product);
+  return await fetch(BASE_URL + queries.PRODUCTS + `/${product.id}`, { 
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+      "Access-Control-Allow-Origin": "*",
+    },
+    body: JSON.stringify(product),
+  })
+    .then((res) => {
+      if(!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      return res.json();
+    })
+    .then((data) => {
+      return data;
+    })
+}
+
+export const getCategories = async () => {
+  return await fetch(BASE_URL + queries.CATEGORIES)
+  .then((res) => {
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+    return res.json();
+  })
+  .then((data) => {
+    return data;
+  });
+}
+
+export const deleteCategory = async (id) => {
+  return await fetch(BASE_URL + queries.CATEGORIES + `/${id}`, {
+    method: 'DELETE',
+  })
   .then((res) => {
     if (!res.ok) {
       throw new Error(`HTTP error! status: ${res.status}`);
@@ -56,15 +105,4 @@ export const deleteProduct = ({id}) => {
 }
 
 
-export const getCategories = () => {
-  return fetch(BASE_URL + queries.CATEGORIES)
-  .then((res) => {
-    if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`);
-    }
-    return res.json();
-  })
-  .then((data) => {
-    return data;
-  });
-}
+

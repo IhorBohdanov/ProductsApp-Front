@@ -1,33 +1,48 @@
-import { useCallback, useEffect, useState } from "react";
-import { getCategories, getProduct } from "../api";
+import { useCallback, useEffect, useState, useRef } from "react";
+import { getCategories, getProduct, updateProduct } from "../api";
 
 export const useProduct = (id) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [categories, setCategories] = useState([]);
+  const [productCategories, setProductCategories] = useState([]);
+  const idRef = useRef(null);
 
   const fetchProductData = useCallback(async () => {
     const res = await getProduct({ id });
     setName(res.data[0].name);
     setDescription(res.data[0].description);
     setPrice(res.data[0].description);
-  }, [id]);
+    setProductCategories(res.data[0].category);
+  }, [id, setProductCategories, setPrice, setDescription, setName]);
 
   const fetchCategories = useCallback(async () => {
     const res = await getCategories();
-    const newCatArr = res.data.map((cat) => ({ ...cat, checked: false }));
-    setCategories(newCatArr);
+    setCategories(res.data.map((item) => ({
+      ...item,
+      checked: false,
+    })));
   }, [setCategories]);
 
   useEffect(() => {
     (async () => {
-      await fetchCategories();
       if (id) {
+        await fetchCategories();
         await fetchProductData();
       }
     })();
-  }, [fetchProductData, fetchCategories]);
+  }, [fetchProductData, fetchCategories, id]);
+
+  // useEffect(() => {
+  //   if (!idRef.current || !productCategories.length || !categories.length) {
+  //     idRef.current = id;
+  //     setCategories(categories.map((item) => ({
+  //       ...item,
+  //       checked: productCategories.includes(item.id), 
+  //     })));
+  //   }
+  // }, [productCategories, setCategories, id, categories])
 
   const getHandler = useCallback(
     (fieldName) => {
@@ -38,6 +53,8 @@ export const useProduct = (id) => {
           return setDescription;
         case "price":
           return setPrice;
+        default:
+          return;
       }
     },
     [setName, setDescription, setPrice]
@@ -56,6 +73,7 @@ export const useProduct = (id) => {
 
   const handleCategoryClick = useCallback(
     (id) => {
+      // console.log(id)
       const newCatArr = categories.map((cat) => {
         if (cat.id === id) {
           cat.checked = !cat.checked;
@@ -69,8 +87,14 @@ export const useProduct = (id) => {
   );
 
   const handleSubmit = useCallback(async () => {
-    console.log("asdasds");
-  }, []);
+    await updateProduct({
+      id,
+      name,
+      description,
+      price, 
+      category: categories.filter(item => item.checked ? item.id : false).map(item => item.id),
+    })
+  }, [id, name, description, price, categories]);
 
   return {
     name,

@@ -6,7 +6,7 @@ import { Page } from "../components/Page";
 const ActionButtons = ({id}) => {
   const navigate = useNavigate();
   const handleDelete = useCallback(async () => {
-    const res = await deleteProduct({id});
+    const res = await deleteProduct(id);
     if (res.data.success) {
       navigate('/products');
     }

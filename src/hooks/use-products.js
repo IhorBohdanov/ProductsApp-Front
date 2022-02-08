@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
-import { getProducts } from "../api";
+import { getProducts, deleteProduct } from "../api";
 
 export const useProducts = () => {
   const [products, setProducts] = useState([]);
@@ -14,6 +14,11 @@ export const useProducts = () => {
     [setProducts]
   );
 
+  const handleDelete = useCallback(async (id) => {
+    await deleteProduct(id);
+    await fetchProducts();
+  }, [fetchProducts])
+
   useEffect(() => {
     (async () => {
       await fetchProducts({ filters, page });
@@ -25,5 +30,6 @@ export const useProducts = () => {
     setFilters,
     page,
     setPage,
+    handleDelete,
   };
 };

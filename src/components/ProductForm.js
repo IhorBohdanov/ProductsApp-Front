@@ -51,7 +51,8 @@ export const ProductForm = ({ productId }) => {
         />
       </fieldset>
       <fieldset className="form__item">
-        Categories
+        <legend className="form__title">Categories</legend>
+        
         {categories.map((cat) => (
           <label className="checkbox-item" key={cat.id}>
             <input

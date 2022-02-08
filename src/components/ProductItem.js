@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export const ProductItem = ({ product }) => {
+export const ProductItem = ({ product, onDelete }) => {
   return (
     <div className="product">
       <div className="product__inner">
@@ -12,10 +12,10 @@ export const ProductItem = ({ product }) => {
           <p className="product__price">{product.price}</p>
         </div>
         <div className="product__action">
-          <Link to={"product/edit" + product.id} className="button">
+          <Link to={"/products/edit/" + product.id} className="button">
             Edit
           </Link>
-          <button className="button button_style_danger">Delete</button>
+          <button className="button button_style_danger" onClick={() => onDelete(product.id)}>Delete</button>
         </div>
       </div>
     </div>

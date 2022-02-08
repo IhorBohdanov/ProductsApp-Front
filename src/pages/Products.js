@@ -10,7 +10,7 @@ const addProductButton = (
 );
 
 export const Products = () => {
-  const { products, setFilters, page, setPage } = useProducts();
+  const { products, setFilters, page, setPage, handleDelete } = useProducts();
 
   const handlePageChange = (pageNum) => {
     setPage(pageNum);
@@ -21,7 +21,7 @@ export const Products = () => {
   };
 
   const productsList = useMemo(() => {
-    return products.map((product) => <ProductItem product={product} />);
+    return products.map((product) => <ProductItem product={product} onDelete={handleDelete} />);
   }, [products]);
 
   return (
