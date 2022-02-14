@@ -5,6 +5,6 @@ import { Page, ProductForm } from "../components";
 export const EditProduct = () => {
   const { id } = useParams();
   return <Page pageTitle={`Edit product ${id}`}>
-    <ProductForm productId={id} />
+    <ProductForm id={id} />
   </Page>;
 };

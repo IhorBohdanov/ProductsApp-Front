@@ -3,3 +3,4 @@ export * from "./use-filters";
 export * from "./use-products";
 export * from "./use-product";
 export * from "./use-categories";
+export * from "./use-category";

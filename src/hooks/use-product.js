@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState, useRef } from "react";
-import { getCategories, getProduct, updateProduct } from "../api";
+import { getCategories, getProduct, updateProduct, createProduct } from "../api";
 
-export const useProduct = (id) => {
+export const useProduct = ({ id, navigate} ) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -13,36 +13,46 @@ export const useProduct = (id) => {
     const res = await getProduct({ id });
     setName(res.data[0].name);
     setDescription(res.data[0].description);
-    setPrice(res.data[0].description);
+    setPrice(res.data[0].price);
+    console.log('category',   res.data[0].category)
     setProductCategories(res.data[0].category);
   }, [id, setProductCategories, setPrice, setDescription, setName]);
 
   const fetchCategories = useCallback(async () => {
     const res = await getCategories();
-    setCategories(res.data.map((item) => ({
-      ...item,
-      checked: false,
-    })));
+    setCategories(
+      res.data.map((item) => ({
+        ...item,
+        checked: false,
+      }))
+    );
   }, [setCategories]);
 
   useEffect(() => {
     (async () => {
+      await fetchCategories();
+
       if (id) {
-        await fetchCategories();
         await fetchProductData();
       }
     })();
   }, [fetchProductData, fetchCategories, id]);
 
-  // useEffect(() => {
-  //   if (!idRef.current || !productCategories.length || !categories.length) {
-  //     idRef.current = id;
-  //     setCategories(categories.map((item) => ({
-  //       ...item,
-  //       checked: productCategories.includes(item.id), 
-  //     })));
-  //   }
-  // }, [productCategories, setCategories, id, categories])
+  useEffect(() => {
+    console.log(idRef.current);
+    if (idRef.current == id || !categories.length || !productCategories.length) return;
+
+    idRef.current = id;
+    console.log({
+      categories, 
+      productCategories,
+      id: idRef.current,  
+    })
+    setCategories(categories.map((item) => ({
+      ...item,
+      checked: productCategories.includes(item.id),
+    })));    
+  }, [productCategories, setCategories, id, categories])
 
   const getHandler = useCallback(
     (fieldName) => {
@@ -73,7 +83,6 @@ export const useProduct = (id) => {
 
   const handleCategoryClick = useCallback(
     (id) => {
-      // console.log(id)
       const newCatArr = categories.map((cat) => {
         if (cat.id === id) {
           cat.checked = !cat.checked;
@@ -87,13 +96,32 @@ export const useProduct = (id) => {
   );
 
   const handleSubmit = useCallback(async () => {
-    await updateProduct({
-      id,
-      name,
-      description,
-      price, 
-      category: categories.filter(item => item.checked ? item.id : false).map(item => item.id),
-    })
+    const category = categories
+      .filter((item) => (item.checked ? item.id : false))
+      .map((item) => item.id);
+    try {
+      let res;
+      if (id) {
+        await updateProduct({
+          id,
+          name,
+          description,
+          price,
+          category,
+        });
+        navigate("/products");
+      } else {
+        await createProduct({
+          name,
+          description,
+          price,
+          category,
+        });
+        navigate("/products");
+      }
+    } catch(e) {
+      console.error(e)
+    }
   }, [id, name, description, price, categories]);
 
   return {

@@ -3,7 +3,6 @@ import { Page } from "../components";
 
 export const Home = () => {
   return <Page pageTitle="Home page">
-    home page
-    
+    Page size for pagination - 5 products per page
   </Page>;
 };

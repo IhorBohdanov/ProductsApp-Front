@@ -1,7 +1,9 @@
 import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { useProduct } from "../hooks";
 
-export const ProductForm = ({ productId }) => {
+export const ProductForm = ({ id }) => {
+  const navigate = useNavigate();
   const {
     name,
     description,
@@ -10,7 +12,7 @@ export const ProductForm = ({ productId }) => {
     handleInputChange,
     handleCategoryClick,
     handleSubmit,
-  } = useProduct(productId);
+  } = useProduct({ id, navigate} );
 
   const handleSubmitClick = useCallback(
     async (e) => {

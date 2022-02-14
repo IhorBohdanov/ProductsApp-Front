@@ -5,19 +5,24 @@ export const useProducts = () => {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
   const [filters, setFilters] = useState({});
+  const [totalProducts, setTotalProducts] = useState(0);
 
   const fetchProducts = useCallback(
     async (options) => {
       const res = await getProducts(options);
-      setProducts(res.data.reverse());
+      setProducts(res.data);
+      setTotalProducts(res.total);
     },
-    [setProducts]
+    [setProducts, setTotalProducts]
   );
 
-  const handleDelete = useCallback(async (id) => {
-    await deleteProduct(id);
-    await fetchProducts();
-  }, [fetchProducts])
+  const handleDelete = useCallback(
+    async (id) => {
+      await deleteProduct(id);
+      await fetchProducts();
+    },
+    [fetchProducts]
+  );
 
   useEffect(() => {
     (async () => {
@@ -29,6 +34,7 @@ export const useProducts = () => {
     products,
     setFilters,
     page,
+    totalProducts,
     setPage,
     handleDelete,
   };

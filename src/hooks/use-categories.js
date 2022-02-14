@@ -6,7 +6,7 @@ export const useCategories = ({CategoryItem}) => {
 
   const fetchCategories = useCallback(async () => {
     const res = await getCategories();
-    setCategories(res.data?.reverse().map(item => <CategoryItem category={item} onDelete={handleDelete}/>));
+    setCategories(res.data?.map(item => <CategoryItem category={item} onDelete={handleDelete}/>));
   }, [setCategories]);
 
   const handleDelete = async (id) => {

@@ -8,3 +8,4 @@ export * from "./CategoryItem";
 export * from "./Pagination";
 export * from "./Filters";
 export * from "./ProductForm";
+export * from "./CategoryForm";

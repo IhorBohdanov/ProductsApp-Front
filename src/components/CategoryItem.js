@@ -11,7 +11,7 @@ export const CategoryItem = ({ category, onDelete }) => {
           </h2>
         </div>  
         <div className="category__action">
-          <Link to={"category/edit" + category.id} className="button">Edit</Link>
+          <Link to={"/categories/edit/" + category.id} className="button">Edit</Link>
           <button className="button button_style_danger" onClick={() => onDelete(category.id)} >Delete</button>
         </div>
       </div>

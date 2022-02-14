@@ -4,7 +4,7 @@ import { getCategories } from "../api";
 import { Page, List, CategoryItem } from "../components";
 import { useCategories } from "../hooks";
 
-const ActionButton = <Link to="" className="button button_style_add">+ Add category</Link>
+const ActionButton = <Link to="/categories/create" className="button button_style_add">+ Add category</Link>
 
 export const Categories = () => {
   const {

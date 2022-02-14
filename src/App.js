@@ -6,6 +6,8 @@ import {
   CreateProduct,
   EditProduct,
   Categories,
+  CreateCategory,
+  EditCategory,
 } from "./pages";
 import { Footer, Header, Main } from "./components";
 import "./scss/styles.scss";
@@ -49,6 +51,14 @@ const pages = [
   {
     path: "/categories",
     element: <Categories />,
+  },
+  {
+    path: "/categories/create",
+    element: <CreateCategory />
+  },
+  {
+    path: "/categories/edit/:id",
+    element: <EditCategory />
   },
 ];
 

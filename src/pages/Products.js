@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Page, List, ProductItem, Pagination, Filters } from "../components";
 import { useProducts } from "../hooks";
+import { PAGE_SIZE } from "../constants";
 
 const addProductButton = (
   <Link to="/products/create" className="button button_style_add">
@@ -10,7 +11,7 @@ const addProductButton = (
 );
 
 export const Products = () => {
-  const { products, setFilters, page, setPage, handleDelete } = useProducts();
+  const { products, setFilters, page, setPage, handleDelete, totalProducts } = useProducts();
 
   const handlePageChange = (pageNum) => {
     setPage(pageNum);
@@ -32,8 +33,8 @@ export const Products = () => {
 
       <Pagination
         currentPage={page}
-        totalElements={22}
-        elementsPerPage={10}
+        totalElements={totalProducts}
+        elementsPerPage={PAGE_SIZE}
         onPageChange={handlePageChange}
       />
     </Page>

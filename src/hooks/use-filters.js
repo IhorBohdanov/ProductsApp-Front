@@ -49,9 +49,9 @@ export const useFilters = ({
     e.preventDefault();
     const filters = {
       search,
-      priceFrom,
-      priceTo,
-      categories: categories.filter(cat => cat.checked)
+      minPrice: priceFrom,
+      maxPrice: priceTo,
+      category: categories.filter(cat => cat.checked).map(cat => cat.id)
     }
 
     onSubmit(filters);
