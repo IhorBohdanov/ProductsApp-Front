@@ -1,0 +1,262 @@
+@import "./reset.scss";
+@import "./vars.scss";
+
+html {
+  font-family: sans-serif;
+}
+
+#root, body, .App {
+  min-height: 100vh;
+}
+
+.App {  
+  background-color: $alice-blue;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.header {
+  background-color: $ming;
+  color: #fff;
+  &__inner {
+    padding: 20px 0;
+  }
+
+  &__links {
+    margin: 0 -10px;
+    a {
+      color: $alice-blue;
+      text-decoration: none;
+      font-size: 30px;
+      &:hover {
+        color: $unbleached-silk;
+      }
+    }
+  }
+}
+
+.footer {
+  background-color: $middle-blue-green;
+  padding: 20px 0;
+
+  &__copyright {
+    color: $ming;
+    font-size: 20px;
+  }
+}
+
+.main {
+  flex-grow: 1;
+  padding: 20px 0;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+
+  &_direction {
+    &_row {
+      flex-direction: row;
+    }
+  }
+
+  &__item {
+    padding: 10px;
+  }
+} 
+
+.page {
+  &__header {
+    display: flex;
+    align-items: center ;
+    justify-content: space-between;
+  }
+
+  &__body {
+    &_wide {
+      margin-left: -10px;
+      margin-right: -10px;
+    }
+  }
+}
+
+.button {
+  text-decoration: none;
+  cursor: pointer;
+  background-color: $dark-salmon;
+  padding: 15px;
+  border-radius: 4px;
+  color: $alice-blue;
+  border: unset;
+  box-sizing: border-box;
+  font-size: 15px;
+  line-height: 15px;
+  display: inline-block;
+
+  &:hover {
+    opacity: 0.6;
+  }
+
+  &_style {
+    &_danger {
+      background-color: $red;
+    }
+
+    &_add {
+      background-color: $green;
+    }
+
+    &_page {
+      color: $dark-salmon;
+      font-weight: 600;
+      background-color: $white;
+      border: 2px solid $dark-salmon;
+      padding: 10px;
+
+      &.active {
+        color: white;
+        background-color: $dark-salmon;
+      }
+    }
+  }
+}
+
+.product {
+  background-color: $white;
+  border: 2px solid $dark-salmon;
+  border-radius: 10px;
+  padding: 15px 20px;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+  }
+
+  &__meta {
+    margin-left: 20px;
+  }
+
+  &__id {
+    background-color: $dark-salmon;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: $white;
+  }
+
+  &__name {
+    font-size: 20px; 
+    margin-bottom: 10px;
+    a {
+      text-decoration: none;
+      color: $ming;
+      &:hover {
+        opacity: 0.8;
+      } 
+    }
+  }
+
+  &__price {
+    color: $ming;
+  }
+
+  &__action {
+    margin-left: auto;
+
+    *:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+}
+
+
+
+.category {
+  background-color: $white;
+  border: 2px solid $dark-salmon;
+  border-radius: 10px;
+  padding: 15px 20px;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+  }
+
+  &__meta {
+    margin-left: 20px;
+  }
+
+  &__id {
+    background-color: $dark-salmon;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: $white;
+  }
+
+  &__name {
+    font-size: 20px; 
+    margin-bottom: 10px;
+    color: $ming;
+  }
+
+  &__action {
+    margin-left: auto;
+
+    *:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+}
+
+.pagination {
+  &__inner {
+    margin: 0 10px;
+    display: flex;
+    gap: 8px;
+  } 
+}
+
+.filters {
+  background-color: $white;
+  border: 2px solid $ming;
+  border-radius: 10px;
+  padding: 15px 20px;
+  margin: 0 10px 25px;  
+}
+
+.form {
+  &__item {
+    margin: 10px 0 5px;
+  }
+
+  &__title {
+    font-size: 20px;
+    color: $ming;
+  }
+}
+
+.input {
+  font-size: 20px;
+}
+
+.checkbox-item {
+  margin-top: 10px;
+  margin-bottom: 5px;
+
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
+}
